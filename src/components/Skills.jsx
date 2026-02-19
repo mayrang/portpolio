@@ -16,12 +16,12 @@ export default function Skills() {
               background: "#fff", border: "1px solid #EEEFF2",
               boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
             }}>
-              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", color: "#A78BFA", fontFamily: "monospace", margin: "0 0 12px" }}>
+              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", color: "#9CA3AF", fontFamily: "monospace", margin: "0 0 12px" }}>
                 {s.cat.toUpperCase()}
               </p>
               {s.items.map(item => (
                 <div key={item} style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 7 }}>
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#DDD6FE", flexShrink: 0 }} />
+                  <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#D1D5DB", flexShrink: 0 }} />
                   <span style={{ fontSize: 13, color: "#374151" }}>{item}</span>
                 </div>
               ))}

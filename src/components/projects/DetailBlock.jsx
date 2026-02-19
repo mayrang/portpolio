@@ -10,7 +10,7 @@ function parseParagraph(text) {
           display: "inline-block",
           fontSize: 10.5, fontWeight: 700,
           padding: "2px 8px", borderRadius: 4, marginRight: 6,
-          background: "#F3F0FF", color: "#7C3AED",
+          background: "#1A1A1A", color: "#fff",
           fontFamily: "monospace", letterSpacing: "0.02em",
           verticalAlign: "middle",
         }}>{label}</span>
@@ -30,7 +30,7 @@ export default function DetailBlock({ icon, title, paragraphs, code, image, imag
         {/* Icon box */}
         <div style={{
           width: 34, height: 34, borderRadius: 10, flexShrink: 0,
-          background: "#F8F7FF",
+          background: "#F3F4F6",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 16, marginTop: 1,
         }}>

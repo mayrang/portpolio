@@ -22,9 +22,9 @@ function LinkBadge({ href, icon, label, onClick }) {
         transition: "background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s",
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.background = "#F3F0FF";
-        e.currentTarget.style.color = "#7C3AED";
-        e.currentTarget.style.borderColor = "#C4B5FD";
+        e.currentTarget.style.background = "#F0F0F0";
+        e.currentTarget.style.color = "#111";
+        e.currentTarget.style.borderColor = "#D1D5DB";
         e.currentTarget.style.transform = "translateY(-1px)";
       }}
       onMouseLeave={e => {
@@ -92,12 +92,11 @@ export default function ProjectCard({ proj, initOpen }) {
             {/* Period + Contribution row */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
               <span style={{
-                fontSize: 11, fontWeight: 700, fontFamily: "monospace",
-                color: proj.accent, letterSpacing: "0.08em",
-                background: proj.accent + "10",
-                padding: "3px 10px", borderRadius: 6,
+                fontSize: 11, fontWeight: 600, fontFamily: "monospace",
+                color: "#6B7280", letterSpacing: "0.06em",
               }}>{proj.period}</span>
-              <Tag label={"기여도 " + proj.contribution} color={proj.accent} />
+              <span style={{ width: 3, height: 3, borderRadius: "50%", background: "#D1D5DB", display: "inline-block" }} />
+              <span style={{ fontSize: 11, fontWeight: 500, color: "#9CA3AF" }}>기여도 {proj.contribution}</span>
             </div>
 
             {/* Title + links */}
@@ -151,11 +150,11 @@ export default function ProjectCard({ proj, initOpen }) {
           {/* Toggle button */}
           <div style={{
             width: 36, height: 36, borderRadius: "50%", flexShrink: 0,
-            border: "1.5px solid " + proj.accent + "30",
-            background: open ? proj.accent : "#fff",
+            border: "1.5px solid #E5E7EB",
+            background: open ? "#111" : "#fff",
             display: "flex", alignItems: "center", justifyContent: "center",
-            color: open ? "#fff" : proj.accent,
-            transition: "background 0.25s, color 0.25s",
+            color: open ? "#fff" : "#6B7280",
+            transition: "background 0.25s, color 0.25s, border-color 0.25s",
             marginTop: 4,
           }}>
             <ChevronIcon open={open} />

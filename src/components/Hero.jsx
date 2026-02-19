@@ -20,35 +20,26 @@ export default function Hero() {
   return (
     <div style={{ maxWidth: 860, margin: "0 auto", padding: "120px 24px 80px" }}>
 
-      {/* Badge */}
-      <div style={{
-        display: "inline-flex", alignItems: "center", gap: 8,
-        padding: "6px 16px", borderRadius: 99,
-        background: "rgba(124,58,237,0.07)", border: "1px solid rgba(124,58,237,0.18)",
-        marginBottom: 28, animation: "fadeUp 0.7s ease both",
-      }}>
-        <span style={{
-          width: 6, height: 6, borderRadius: "50%",
-          background: "#7C3AED", display: "inline-block",
-          animation: "blink 2s infinite",
-        }} />
-        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#7C3AED", fontFamily: "monospace" }}>
-          FRONTEND DEVELOPER
-        </span>
-      </div>
+      {/* Label */}
+      <p style={{
+        fontSize: 11, fontWeight: 600, letterSpacing: "0.18em",
+        color: "#9CA3AF", fontFamily: "monospace",
+        margin: "0 0 24px",
+        animation: "fadeUp 0.7s ease both",
+      }}>FRONTEND DEVELOPER</p>
 
       {/* Name */}
       <h1 style={{
         fontSize: "clamp(48px, 8vw, 72px)",
         fontWeight: 800, lineHeight: 1,
         fontFamily: "'Syne', sans-serif", letterSpacing: "-0.03em",
-        margin: "0 0 28px", animation: "fadeUp 0.8s ease 0.1s both",
-        color: "#0A0A0A",
+        margin: "0 0 28px", color: "#0A0A0A",
+        animation: "fadeUp 0.8s ease 0.1s both",
       }}>박건상</h1>
 
       {/* Tagline */}
       <p style={{
-        fontSize: "clamp(15px, 2vw, 17px)",
+        fontSize: "clamp(15px, 2vw, 18px)",
         fontWeight: 600, lineHeight: 1.65,
         color: "#374151",
         margin: "0 0 12px",
@@ -56,12 +47,7 @@ export default function Hero() {
         maxWidth: 560,
       }}>
         데이터로 UX를 증명하고,{" "}
-        <span style={{
-          color: "#7C3AED",
-          background: "linear-gradient(135deg, #7C3AED, #A78BFA)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}>
+        <span style={{ color: "#7C3AED", fontWeight: 700 }}>
           기술로 DX를 개선하는 프론트엔드 개발자
         </span>입니다.
       </p>
@@ -79,8 +65,7 @@ export default function Hero() {
 
       {/* Divider */}
       <div style={{
-        width: 40, height: 2,
-        background: "linear-gradient(to right, #7C3AED, transparent)",
+        width: "100%", height: 1, background: "#F0F0F0",
         marginBottom: 36,
         animation: "fadeUp 0.8s ease 0.3s both",
       }} />
@@ -98,7 +83,7 @@ export default function Hero() {
           }}>
             <div style={{
               width: 40, height: 40, borderRadius: 12, flexShrink: 0,
-              background: "rgba(124,58,237,0.07)",
+              background: "#F3F4F6",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: 18, marginTop: 1,
             }}>
@@ -154,7 +139,7 @@ export default function Hero() {
             border: "1.5px solid #E5E7EB",
             transition: "border-color 0.2s, color 0.2s, transform 0.2s",
           }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = "#7C3AED"; e.currentTarget.style.color = "#7C3AED"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = "#111"; e.currentTarget.style.color = "#111"; e.currentTarget.style.transform = "translateY(-1px)"; }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = "#E5E7EB"; e.currentTarget.style.color = "#374151"; e.currentTarget.style.transform = "translateY(0)"; }}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
