@@ -41,7 +41,8 @@ const PROJECTS = [
     period: "2025.06 – 2025.11",
     title: "Sometime",
     contribution: "50%",
-    sub: "지역 기반 대학생 인증 및 매칭 플랫폼 · https://some-in-univ.com/",
+    url: "https://some-in-univ.com",
+    sub: "지역 기반 대학생 인증 및 매칭 플랫폼",
     accent: "#7C3AED",
     tags: ["React Native (Expo)", "TypeScript", "Reanimated", "Amplitude", "TanStack Query", "Zustand"],
     metrics: [
