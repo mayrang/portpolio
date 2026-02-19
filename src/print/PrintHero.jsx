@@ -18,63 +18,63 @@ const BULLETS = [
 
 export default function PrintHero() {
   return (
-    <div style={{ marginBottom: 40 }}>
+    <div style={{ marginBottom: 56 }}>
       {/* Badge */}
       <div style={{
         display: "inline-flex", alignItems: "center", gap: 8,
-        padding: "4px 14px", borderRadius: 99,
+        padding: "6px 18px", borderRadius: 99,
         background: "rgba(124,58,237,0.07)", border: "1px solid rgba(124,58,237,0.18)",
-        marginBottom: 20,
+        marginBottom: 28,
       }}>
-        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7C3AED", display: "inline-block" }} />
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", color: "#7C3AED", fontFamily: "monospace" }}>
+        <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#7C3AED", display: "inline-block" }} />
+        <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", color: "#7C3AED", fontFamily: "monospace" }}>
           FRONTEND DEVELOPER
         </span>
       </div>
 
       {/* Name */}
       <h1 style={{
-        fontSize: 52, fontWeight: 800, lineHeight: 1,
+        fontSize: 72, fontWeight: 800, lineHeight: 1,
         fontFamily: "'Syne', sans-serif", letterSpacing: "-0.03em",
-        margin: "0 0 20px", color: "#0A0A0A",
+        margin: "0 0 28px", color: "#0A0A0A",
       }}>박건상</h1>
 
       {/* Tagline */}
       <p style={{
-        fontSize: 16, fontWeight: 600, lineHeight: 1.65,
-        color: "#374151", margin: "0 0 10px",
+        fontSize: 20, fontWeight: 600, lineHeight: 1.65,
+        color: "#374151", margin: "0 0 14px",
       }}>
         데이터로 UX를 증명하고,{" "}
         <span style={{ color: "#7C3AED" }}>기술로 DX를 개선하는 프론트엔드 개발자</span>입니다.
       </p>
 
       <p style={{
-        fontSize: 13.5, color: "#9CA3AF", lineHeight: 1.8, margin: "0 0 28px",
+        fontSize: 16, color: "#9CA3AF", lineHeight: 1.85, margin: "0 0 36px",
       }}>
         지난 4년간 웹 개발에 몰두하며, 단순히 화면을 구현하는 것을 넘어
         프로덕트의 비즈니스 목표 달성에 기여하는 엔지니어로 성장했습니다.
       </p>
 
       {/* Divider */}
-      <div style={{ width: 36, height: 2, background: "linear-gradient(to right, #7C3AED, transparent)", marginBottom: 24 }} />
+      <div style={{ width: 40, height: 2, background: "linear-gradient(to right, #7C3AED, transparent)", marginBottom: 32 }} />
 
       {/* Bullets */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         {BULLETS.map((b, i) => (
           <div key={i} style={{
-            display: "flex", gap: 16, alignItems: "flex-start",
-            padding: "14px 0",
+            display: "flex", gap: 20, alignItems: "flex-start",
+            padding: "18px 0",
             borderBottom: i < BULLETS.length - 1 ? "1px solid #F3F4F6" : "none",
           }}>
             <div style={{
-              width: 34, height: 34, borderRadius: 10, flexShrink: 0,
+              width: 42, height: 42, borderRadius: 12, flexShrink: 0,
               background: "rgba(124,58,237,0.07)",
               display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 16,
+              fontSize: 20,
             }}>{b.icon}</div>
             <div>
-              <p style={{ fontSize: 13, fontWeight: 700, color: "#111", margin: "0 0 4px" }}>{b.title}</p>
-              <p style={{ fontSize: 12.5, color: "#6B7280", lineHeight: 1.75, margin: 0 }}>{b.desc}</p>
+              <p style={{ fontSize: 16, fontWeight: 700, color: "#111", margin: "0 0 6px" }}>{b.title}</p>
+              <p style={{ fontSize: 15, color: "#6B7280", lineHeight: 1.75, margin: 0 }}>{b.desc}</p>
             </div>
           </div>
         ))}

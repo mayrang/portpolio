@@ -26,13 +26,13 @@ export default function PrintPage() {
         {/* Nav */}
         <div style={{
           display: "flex", justifyContent: "space-between", alignItems: "center",
-          marginBottom: 36, paddingBottom: 16,
+          marginBottom: 48, paddingBottom: 20,
           borderBottom: "1px solid #EBEBEB",
         }}>
-          <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 16 }}>
+          <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 20 }}>
             <span style={{ color: "#7C3AED" }}>박</span>건상
           </span>
-          <div style={{ display: "flex", gap: 16, fontSize: 12, color: "#9CA3AF" }}>
+          <div style={{ display: "flex", gap: 16, fontSize: 14, color: "#9CA3AF" }}>
             <span>pkss0626@naver.com</span>
             <span>·</span>
             <span>010-6571-0980</span>
@@ -46,8 +46,8 @@ export default function PrintPage() {
 
         {/* Projects */}
         <div style={{ marginBottom: 8 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", color: "#A78BFA", fontFamily: "monospace" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+            <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.14em", color: "#A78BFA", fontFamily: "monospace" }}>
               // PROJECTS
             </span>
             <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, #E5E7EB, transparent)" }} />
@@ -62,13 +62,13 @@ export default function PrintPage() {
 
         {/* Footer */}
         <div style={{
-          borderTop: "1px solid #EEEFF2", paddingTop: 20, marginTop: 8,
+          borderTop: "1px solid #EEEFF2", paddingTop: 24, marginTop: 8,
           display: "flex", justifyContent: "space-between", alignItems: "center",
         }}>
-          <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 14 }}>
+          <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 18 }}>
             <span style={{ color: "#7C3AED" }}>박</span>건상 · Frontend Developer
           </span>
-          <span style={{ fontSize: 11, color: "#9CA3AF" }}>pkss0626@naver.com · 한밭대학교</span>
+          <span style={{ fontSize: 14, color: "#9CA3AF" }}>pkss0626@naver.com · 한밭대학교</span>
         </div>
       </div>
     </div>
