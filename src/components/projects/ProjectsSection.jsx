@@ -10,7 +10,7 @@ export default function ProjectsSection() {
         <SectionHeader label="// PROJECTS" />
       </Reveal>
       {PROJECTS.map((proj, i) => (
-        <ProjectCard key={proj.title} proj={proj} initOpen={i === 0} />
+        <ProjectCard key={proj.title} proj={proj} initOpen={true} />
       ))}
     </div>
   );

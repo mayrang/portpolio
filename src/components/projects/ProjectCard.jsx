@@ -106,7 +106,7 @@ export default function ProjectCard({ proj, initOpen }) {
                 fontWeight: 800, color: "#0A0A0A",
                 margin: 0,
                 fontFamily: "'Syne', Georgia, sans-serif",
-                letterSpacing: "-0.02em", lineHeight: 1.1,
+                letterSpacing: "-0.02em", lineHeight: 1.2, paddingBottom: 2,
               }}>{proj.title}</h3>
               {proj.github && (
                 <LinkBadge
