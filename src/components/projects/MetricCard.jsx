@@ -12,8 +12,8 @@ export default function MetricCard({ value, label, sub, color }) {
         fontFamily: "'Syne', sans-serif",
         letterSpacing: "-0.02em",
       }}>{value}</p>
-      <p style={{ fontSize: 13, fontWeight: 600, color: "#1a1a1a", margin: "0 0 3px" }}>{label}</p>
-      <p style={{ fontSize: 11.5, color: "#9CA3AF", margin: 0, lineHeight: 1.5 }}>{sub}</p>
+      <p style={{ fontSize: 13.5, fontWeight: 600, color: "#1a1a1a", margin: "0 0 4px" }}>{label}</p>
+      <p style={{ fontSize: 12.5, color: "#9CA3AF", margin: 0, lineHeight: 1.55 }}>{sub}</p>
     </div>
   );
 }

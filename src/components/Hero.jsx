@@ -1,16 +1,13 @@
 const BULLETS = [
   {
-    icon: "📊",
     title: "데이터 기반의 UX 최적화",
-    desc: "직감이 아닌 '데이터'로 소통합니다. Amplitude를 활용해 유저 퍼널을 분석하고, 가입 플로우를 개선하여 전환율을 2.3배 높인 경험이 있습니다.",
+    desc: "직감이 아닌 데이터로 소통합니다. Amplitude를 활용해 유저 퍼널을 분석하고, 가입 플로우를 개선하여 전환율을 2.3배 높인 경험이 있습니다.",
   },
   {
-    icon: "⚙️",
     title: "팀을 위한 DX 개선 및 지식 공유",
     desc: "동료들의 개발 경험을 중요하게 생각합니다. 사내 애니메이션 라이브러리를 자체 개발 및 npm에 배포하여 팀의 생산성과 프로덕트 퀄리티를 동시에 높였습니다.",
   },
   {
-    icon: "🤝",
     title: "목적 중심의 커뮤니케이션",
     desc: "탄탄한 기술적 이해도를 바탕으로 다양한 직군과 적극적으로 협업하며, 최적의 문제 해결 방안을 도출해 냅니다.",
   },
@@ -54,7 +51,7 @@ export default function Hero() {
 
       {/* Sub description */}
       <p style={{
-        fontSize: 14.5, color: "#9CA3AF", lineHeight: 1.85,
+        fontSize: 15, color: "#6B7280", lineHeight: 1.9,
         margin: "0 0 48px",
         animation: "fadeUp 0.8s ease 0.25s both",
         maxWidth: 520,
@@ -72,31 +69,20 @@ export default function Hero() {
 
       {/* Bullet list */}
       <div style={{
-        display: "flex", flexDirection: "column", gap: 0,
+        display: "flex", flexDirection: "column",
         animation: "fadeUp 0.8s ease 0.35s both",
       }}>
         {BULLETS.map((b, i) => (
           <div key={i} style={{
-            display: "flex", gap: 20, alignItems: "flex-start",
-            padding: "20px 0",
+            padding: "22px 0",
             borderBottom: i < BULLETS.length - 1 ? "1px solid #F3F4F6" : "none",
           }}>
-            <div style={{
-              width: 40, height: 40, borderRadius: 12, flexShrink: 0,
-              background: "#F3F4F6",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 18, marginTop: 1,
-            }}>
-              {b.icon}
-            </div>
-            <div>
-              <p style={{ fontSize: 14, fontWeight: 700, color: "#111", margin: "0 0 5px", lineHeight: 1.4 }}>
-                {b.title}
-              </p>
-              <p style={{ fontSize: 13.5, color: "#6B7280", lineHeight: 1.8, margin: 0 }}>
-                {b.desc}
-              </p>
-            </div>
+            <p style={{ fontSize: 14.5, fontWeight: 700, color: "#111", margin: "0 0 7px", lineHeight: 1.4 }}>
+              {b.title}
+            </p>
+            <p style={{ fontSize: 14.5, color: "#6B7280", lineHeight: 1.85, margin: 0 }}>
+              {b.desc}
+            </p>
           </div>
         ))}
       </div>

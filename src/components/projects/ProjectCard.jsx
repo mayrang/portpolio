@@ -65,17 +65,11 @@ export default function ProjectCard({ proj, initOpen }) {
       opacity: vis ? 1 : 0,
       transform: vis ? "translateY(0)" : "translateY(28px)",
       transition: "opacity 0.65s ease, transform 0.65s ease",
-      marginBottom: 16, borderRadius: 20,
+      marginBottom: 12, borderRadius: 16,
       border: "1px solid #E8E8EC",
       background: "#fff",
-      boxShadow: "0 2px 16px rgba(0,0,0,0.05)",
       overflow: "hidden",
     }}>
-      {/* Accent top bar */}
-      <div style={{
-        height: 3,
-        background: `linear-gradient(to right, ${proj.accent}, ${proj.accent}44)`,
-      }} />
 
       <button
         onClick={() => setOpen(!open)}

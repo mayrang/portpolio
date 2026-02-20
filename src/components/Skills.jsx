@@ -6,7 +6,7 @@ export default function Skills() {
   return (
     <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px 80px" }}>
       <Reveal>
-        <SectionHeader label="// SKILLS" />
+        <SectionHeader label="SKILLS" />
       </Reveal>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
         {SKILLS.map((s, i) => (
