@@ -9,7 +9,7 @@ export default function MetricCard({ value, label, sub, color }) {
         fontSize: "clamp(22px, 3vw, 28px)",
         fontWeight: 800, color,
         margin: "0 0 6px", lineHeight: 1,
-        fontFamily: "'Syne', sans-serif",
+        fontFamily: "'Space Grotesk', sans-serif",
         letterSpacing: "-0.02em",
       }}>{value}</p>
       <p style={{ fontSize: 13.5, fontWeight: 600, color: "#1a1a1a", margin: "0 0 4px" }}>{label}</p>

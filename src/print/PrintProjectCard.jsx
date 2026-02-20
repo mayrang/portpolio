@@ -39,7 +39,7 @@ function PrintMetricCard({ value, label, sub, color }) {
         width: 64, height: 64, borderRadius: "50%",
         background: color + "12", pointerEvents: "none",
       }} />
-      <p style={{ fontSize: 26, fontWeight: 800, color, margin: "0 0 6px", fontFamily: "'Syne', sans-serif", letterSpacing: "-0.02em" }}>{value}</p>
+      <p style={{ fontSize: 26, fontWeight: 800, color, margin: "0 0 6px", fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "-0.02em" }}>{value}</p>
       <p style={{ fontSize: 14, fontWeight: 600, color: "#1a1a1a", margin: "0 0 3px" }}>{label}</p>
       <p style={{ fontSize: 13, color: "#9CA3AF", margin: 0 }}>{sub}</p>
     </div>
@@ -125,7 +125,7 @@ export default function PrintProjectCard({ proj }) {
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8, flexWrap: "wrap" }}>
           <h3 style={{
             fontSize: 32, fontWeight: 800, color: "#0A0A0A",
-            margin: 0, fontFamily: "'Syne', sans-serif",
+            margin: 0, fontFamily: "'Space Grotesk', sans-serif",
             letterSpacing: "-0.02em", lineHeight: 1.1,
           }}>{proj.title}</h3>
           {proj.github && (

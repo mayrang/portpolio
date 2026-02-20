@@ -17,7 +17,7 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", background: "#F8F9FB", color: "#111", fontFamily: "system-ui, -apple-system, sans-serif" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
         * { box-sizing: border-box; }
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: #DDD; border-radius: 3px; }

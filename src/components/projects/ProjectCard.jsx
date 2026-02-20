@@ -99,7 +99,7 @@ export default function ProjectCard({ proj, initOpen }) {
                 fontSize: "clamp(22px, 3.5vw, 30px)",
                 fontWeight: 800, color: "#0A0A0A",
                 margin: 0,
-                fontFamily: "'Syne', Georgia, sans-serif",
+                fontFamily: "'Space Grotesk', Georgia, sans-serif",
                 letterSpacing: "-0.02em", lineHeight: 1.2, paddingBottom: 2,
               }}>{proj.title}</h3>
               {proj.github && (

@@ -35,7 +35,7 @@ export default function PrintHero() {
       {/* Name */}
       <h1 style={{
         fontSize: 72, fontWeight: 800, lineHeight: 1,
-        fontFamily: "'Syne', sans-serif", letterSpacing: "-0.03em",
+        fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "-0.03em",
         margin: "0 0 28px", color: "#0A0A0A",
       }}>박건상</h1>
 

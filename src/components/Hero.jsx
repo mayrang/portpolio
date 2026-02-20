@@ -29,7 +29,7 @@ export default function Hero() {
       <h1 style={{
         fontSize: "clamp(48px, 8vw, 72px)",
         fontWeight: 800, lineHeight: 1,
-        fontFamily: "'Syne', sans-serif", letterSpacing: "-0.03em",
+        fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "-0.03em",
         margin: "0 0 28px", color: "#0A0A0A",
         animation: "fadeUp 0.8s ease 0.1s both",
       }}>박건상</h1>

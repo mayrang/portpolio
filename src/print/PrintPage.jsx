@@ -11,7 +11,7 @@ export default function PrintPage() {
       padding: "40px 0 60px",
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
         * { box-sizing: border-box; }
       `}</style>
 
@@ -29,7 +29,7 @@ export default function PrintPage() {
           marginBottom: 48, paddingBottom: 20,
           borderBottom: "1px solid #EBEBEB",
         }}>
-          <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 20 }}>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: 20 }}>
             <span style={{ color: "#7C3AED" }}>박</span>건상
           </span>
           <div style={{ display: "flex", gap: 16, fontSize: 14, color: "#9CA3AF" }}>
@@ -65,7 +65,7 @@ export default function PrintPage() {
           borderTop: "1px solid #EEEFF2", paddingTop: 24, marginTop: 8,
           display: "flex", justifyContent: "space-between", alignItems: "center",
         }}>
-          <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 18 }}>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: 18 }}>
             <span style={{ color: "#7C3AED" }}>박</span>건상 · Frontend Developer
           </span>
           <span style={{ fontSize: 14, color: "#9CA3AF" }}>pkss0626@naver.com · 한밭대학교</span>

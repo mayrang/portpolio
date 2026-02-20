@@ -9,7 +9,7 @@ export default function Nav({ solid }) {
       borderBottom: solid ? "1px solid #EBEBEB" : "none",
       transition: "all 0.3s",
     }}>
-      <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 17 }}>
+      <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: 17 }}>
         <span style={{ color: "#7C3AED" }}>박</span>건상
       </div>
       <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
