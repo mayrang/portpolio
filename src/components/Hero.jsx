@@ -1,15 +1,15 @@
 const BULLETS = [
   {
-    title: "데이터 기반의 UX 최적화",
-    desc: "직감이 아닌 데이터로 소통합니다. Amplitude를 활용해 유저 퍼널을 분석하고, 가입 플로우를 개선하여 전환율을 2.3배 높인 경험이 있습니다.",
+    title: "코드 품질과 프로덕트 안정성",
+    desc: "FSD 아키텍처 전환·TDD 테스트 구축(0→237개), 번들 분석 기반 성능 최적화(초기 번들 -91%, Lighthouse Performance 98점), 에러 핸들링 공통화 및 Sentry 모니터링 도입, 웹 접근성 개선(Lighthouse Accessibility 96점) 등 코드 품질과 서비스 안정성 향상을 주도해왔습니다.",
   },
   {
-    title: "팀을 위한 DX 개선 및 지식 공유",
-    desc: "동료들의 개발 경험을 중요하게 생각합니다. 사내 애니메이션 라이브러리를 자체 개발 및 npm에 배포하여 팀의 생산성과 프로덕트 퀄리티를 동시에 높였습니다.",
+    title: "데이터로 증명하는 UX 개선",
+    desc: "직감이 아닌 데이터로 소통합니다. 팀 내 UX 개선 필요성을 설득하기 위해 자발적으로 Amplitude를 도입하고, 데이터 기반으로 가입 플로우를 재설계해 회원가입 전환율을 6%→14%(2.3배)로 높였습니다.",
   },
   {
-    title: "목적 중심의 커뮤니케이션",
-    desc: "탄탄한 기술적 이해도를 바탕으로 다양한 직군과 적극적으로 협업하며, 최적의 문제 해결 방안을 도출해 냅니다.",
+    title: "팀 DX 개선 및 오픈소스 기여",
+    desc: "동료들의 개발 경험을 중요하게 생각합니다. React Native 애니메이션 라이브러리(reanimated-composer)를 직접 개발해 npm 오픈소스로 배포, 반복 보일러플레이트 30줄을 3줄로 단축했습니다.",
   },
 ];
 
@@ -42,10 +42,11 @@ export default function Hero() {
         margin: "0 0 12px",
         animation: "fadeUp 0.8s ease 0.2s both",
         maxWidth: 560,
+        wordBreak: "keep-all",
       }}>
-        데이터로 UX를 증명하고,{" "}
+        코드 품질과 서비스 성장을{" "}
         <span style={{ color: "#7C3AED", fontWeight: 700 }}>
-          기술로 DX를 개선하는 프론트엔드 개발자
+          함께 고민하는 프론트엔드 개발자
         </span>입니다.
       </p>
 
@@ -55,9 +56,10 @@ export default function Hero() {
         margin: "0 0 48px",
         animation: "fadeUp 0.8s ease 0.25s both",
         maxWidth: 520,
+        wordBreak: "keep-all",
       }}>
-        지난 4년간 웹 개발에 몰두하며, 단순히 화면을 구현하는 것을 넘어
-        프로덕트의 비즈니스 목표 달성에 기여하는 엔지니어로 성장했습니다.
+        스타트업에서 아키텍처 개선·성능 최적화·접근성 대응 등 기술적 깊이를 쌓으며,
+        서비스 지표와 팀 생산성 향상에도 직접 기여해왔습니다.
       </p>
 
       {/* Divider */}
@@ -77,10 +79,10 @@ export default function Hero() {
             padding: "22px 0",
             borderBottom: i < BULLETS.length - 1 ? "1px solid #F3F4F6" : "none",
           }}>
-            <p style={{ fontSize: 14.5, fontWeight: 700, color: "#111", margin: "0 0 7px", lineHeight: 1.4 }}>
+            <p style={{ fontSize: 14.5, fontWeight: 700, color: "#111", margin: "0 0 7px", lineHeight: 1.4, wordBreak: "keep-all" }}>
               {b.title}
             </p>
-            <p style={{ fontSize: 14.5, color: "#6B7280", lineHeight: 1.85, margin: 0 }}>
+            <p style={{ fontSize: 14.5, color: "#6B7280", lineHeight: 1.85, margin: 0, wordBreak: "keep-all" }}>
               {b.desc}
             </p>
           </div>

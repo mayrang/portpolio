@@ -2,16 +2,111 @@ import IMGS from './images.js';
 import sometimeScreen1 from '../assets/image/sometime/image.png';
 import sometimeScreen2 from '../assets/image/sometime/image-2.png';
 import sometimeEdaArch from '../assets/image/sometime/image-3.png';
-import moingDesign from '../assets/image/moing/image-4.png';
-import moingMap1 from '../assets/image/moing/image-5.png';
-import moingMap2 from '../assets/image/moing/image-6.png';
-import moingCalendar from '../assets/image/moing/image-7.png';
-import moingAuth1 from '../assets/image/moing/image-8.png';
-import moingAuth2 from '../assets/image/moing/image-9.png';
-import moingFilter1 from '../assets/image/moing/image-10.png';
-import moingFilter2 from '../assets/image/moing/image-11.png';
+import moingSentry from '../assets/image/moing/image-sentry.png';
+import moingLighthouse from '../assets/image/moing/image-lighthouse.png';
 import dietnamLib from '../assets/image/dietnam/image-12.png';
 import dietnamGps from '../assets/image/dietnam/image-13.png';
+
+const CODE_ERROR_HANDLING = `// Before: 13개 훅마다 에러 처리를 각자 작성 — retry 없음, Sentry 없음
+const mutation = useMutation({
+  mutationFn: () => postBookmark(accessToken, userId, travelNumber),
+  onError: (error) => {
+    console.error(error); // 정책 없음, 모니터링 없음
+  },
+});
+
+// After: createMutationOptions로 정책 한 곳에서 주입
+// ① 단순 케이스 — 네트워크/서버 에러 모두 Toast
+const mutation = useMutation({
+  ...createMutationOptions({
+    mutationFn: () => postBookmark(accessToken, userId, travelNumber),
+    policy: { network: 'toast', system: 'toast' },
+  }),
+  onSuccess: invalidateAll,
+});
+
+// ② retry 케이스 — 네트워크 에러 시 1s→2s→4s 재시도 후 Toast
+const mutation = useMutation({
+  ...createMutationOptions({
+    mutationFn: () => createTrip(travelData, accessToken),
+    policy: { network: 'retry', system: 'toast' },
+  }),
+});
+
+// ③ business 에러 위임 — 로그인 4xx는 폼에서 처리
+const mutation = useMutation({
+  ...createMutationOptions({
+    mutationFn: ({ email, password }) => axiosInstance.post('/api/login', { email, password }),
+    policy: { network: 'retry', system: 'toast' },
+    onBusinessError: () => { /* setError('email', ...) — 폼에서 결정 */ },
+  }),
+});`;
+
+const CODE_LOGGER_INTERFACE = `// src/shared/lib/logger/types.ts
+export interface ILogger {
+  error(message: string, error?: unknown, context?: Record<string, unknown>): void;
+  warn(message: string, context?: Record<string, unknown>): void;
+  info(message: string, context?: Record<string, unknown>): void;
+  breadcrumb(message: string, data?: Record<string, unknown>): void;
+  /** 로그인/로그아웃 시 호출. null이면 유저 컨텍스트 초기화 */
+  setUser(user: { id: number | string; email?: string } | null): void;
+}`;
+
+const CODE_LOGGER_FACTORY = `// src/shared/lib/logger/index.ts
+function createLogger(): ILogger {
+  if (process.env.NODE_ENV === 'test')       return new NoopLogger();
+  if (process.env.NODE_ENV === 'production') return new SentryLogger();
+  return new ConsoleLogger();
+}
+
+export const logger: ILogger = createLogger();
+
+// 호출부 — 환경 분기 없이 한 줄로 통일
+logger.error('API 호출 실패', error, { url: '/api/travel' });`;
+
+const CODE_FOCUS_TRAP = `// src/shared/ui/modal/BaseModal.tsx
+const modalRef = useRef<HTMLDivElement>(null);
+const previousFocusRef = useRef<HTMLElement | null>(null);
+
+useEffect(() => {
+  if (!isOpen) return;
+  previousFocusRef.current = document.activeElement as HTMLElement;
+
+  const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  focusable?.[0]?.focus(); // 모달 열릴 때 첫 요소로 포커스 이동
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') { onClose(); return; }
+    if (e.key === 'Tab' && focusable && focusable.length > 0) {
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();  // Shift+Tab: 맨 앞 → 맨 뒤 순환
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus(); // Tab: 맨 뒤 → 맨 앞 순환
+      }
+    }
+  };
+
+  document.addEventListener('keydown', handleKeyDown);
+  return () => {
+    document.removeEventListener('keydown', handleKeyDown);
+    previousFocusRef.current?.focus(); // 닫힐 때 트리거 버튼으로 포커스 복귀
+  };
+}, [isOpen, onClose]);`;
+
+const CODE_DYNAMIC_IMPORT = `// Before: 정적 import → 초기 번들에 포함 (1.79MB)
+import TravelLogMap from "@/components/map/TravelLogMap";
+
+// After: Dynamic Import → 별도 청크 분리 (164kB)
+const TravelLogMap = dynamic(() => import("@/components/map/TravelLogMap"), {
+  ssr: false,       // Leaflet window 참조 에러 동시 해결
+  loading: () => <div className="w-full h-[400px] bg-gray-200 animate-pulse rounded-xl" />,
+});
+
+// ANALYZE=true yarn build → webpack 트리맵으로 병목 수치 확인 후 적용`;
 
 const CODE_EDA = `// UI는 이벤트를 '발행(Emit)'하기만 합니다.
 const handleSend = (text) => {
@@ -42,7 +137,7 @@ const PROJECTS = [
     title: "Sometime",
     contribution: "50%",
     url: "https://some-in-univ.com",
-    sub: "지역 기반 대학생 인증 및 매칭 플랫폼",
+    sub: "지역 기반 대학생 인증 및 매칭 플랫폼 · MAU 1,000+",
     accent: "#7C3AED",
     tags: ["React Native (Expo)", "TypeScript", "Reanimated", "Amplitude", "TanStack Query", "Zustand"],
     metrics: [
@@ -67,7 +162,7 @@ const PROJECTS = [
         icon: "📈",
         title: "2. Amplitude 데이터로 증명한 가입 전환율 2.3배 성장",
         paragraphs: [
-          "[Hypothesis: 이탈의 원인은 '복잡함'과 '모호함'] Amplitude 퍼널 분석 결과, 회원가입 단계에서 90% 이상의 이탈이 발생하는 것을 확인. 두 가지 가설을 수립했습니다: ① PASS 본인 인증의 피로감 — 복잡한 인증 절차가 높은 진입 장벽으로 작용 ② 지역 선택의 모호함 — '거주지'/'학교 위치' 선택 시 인지적 부하(Cognitive Load) 발생.",
+          "[Problem] 팀 내 UX 개선의 중요성을 객관적 지표로 설득하기 위해 팀 내 최초로 Amplitude 도입을 제안하고, 데이터 수집 설계부터 퍼널 분석·플로우 재설계까지 전체 프로세스를 단독으로 리딩했습니다. 퍼널 분석 결과 회원가입 단계에서 90% 이상의 이탈이 확인됐고, 두 가지 가설을 수립했습니다: ① PASS 본인 인증의 피로감 — 복잡한 인증 절차가 높은 진입 장벽으로 작용 ② 지역 선택의 모호함 — '거주지'/'학교 위치' 선택 시 인지적 부하(Cognitive Load) 발생.",
           "[Solution: 불필요한 단계 삭제 및 검색 강화] ① 카카오 소셜 로그인 도입으로 PASS 인증 대체(원클릭 진입) ② '지역 선택' 단계 과감히 삭제, 학교 선택으로 바로 직행 ③ 학교 검색 알고리즘 및 UI 대폭 강화.",
           "[Result] 배포 후 회원가입 전환율 6% → 14%, 약 2.3배(133%) 성장.",
         ],
@@ -91,63 +186,48 @@ const PROJECTS = [
     github: "https://github.com/SWYP6-Team7/frontend",
     sub: "여행 동행 모집 및 커뮤니티 플랫폼 · Frontend 2인, Backend 3인, 기획 1인, Design 2인",
     accent: "#0D9488",
-    tags: ["React", "TypeScript", "TanStack Query", "Storybook", "Emotion", "Axios"],
+    tags: ["Next.js", "React", "TypeScript", "TanStack Query", "Tailwind CSS", "Vitest", "Playwright", "Sentry"],
     metrics: [
-      { value: "Design", label: "Storybook 디자인 시스템", sub: "컴포넌트 표준화·모듈화" },
-      { value: "Dual Map", label: "국내·해외 지도", sub: "Kakao × Google API 동적 분기" },
-      { value: "Custom", label: "캘린더 자체 개발", sub: "라이브러리 미의존 확장 설계" },
+      { value: "-91%", label: "번들 최적화", sub: "1.79MB → 164kB · Dynamic Import" },
+      { value: "96점", label: "Lighthouse 접근성", sub: "WCAG 2.1 AA · Focus Trap" },
+      { value: "Sentry", label: "에러 모니터링", sub: "공통 핸들링 · 환경별 Logger" },
     ],
     images: [],
     details: [
       {
-        icon: "🎨",
-        title: "1. Storybook 기반 디자인 시스템 구축 (DX 개선)",
+        icon: "🛡",
+        title: "1. 에러 핸들링 공통화 및 Sentry 프로덕션 모니터링 도입",
         paragraphs: [
-          "[Problem] 파편화된 UI 컴포넌트로 인해 디자인-개발 간 소통 비용 증가 및 개발 생산성 저하.",
-          "[Solution & Result] Storybook과 Emotion(CSS-in-JS)을 결합하여 UI 컴포넌트를 표준화·모듈화. 독립적인 환경에서 재사용 가능한 디자인 시스템을 구축하여 팀원 간 UI 의존성을 낮추고 프론트엔드 개발 속도를 대폭 향상시켰습니다.",
+          "[Problem] mutation마다 에러 처리가 흩어져 있었습니다. 일부는 console.error만 있고, retry 로직이나 Toast 피드백이 누락된 경우도 있었습니다. 또한 Sentry를 직접 호출하면 테스트 환경에서 SDK 로드 오버헤드, 개발 중 에러의 프로덕션 노이즈 수집, 서비스 교체 시 전체 호출부 수정 문제가 생겼습니다.",
+          "[Solution] 에러를 네트워크 장애 · 비즈니스 오류(4xx) · 서버 오류(5xx)로 분류하는 classifyError를 설계하고, createMutationOptions 팩토리로 42개 mutation 전체에 재시도(지수 백오프 3회) · Toast · Logger 수집을 한 번에 주입했습니다. business 에러는 컨텍스트마다 의미가 달라 항상 콜백으로 위임하고, onSuccess는 팩토리 밖에서 선언하는 패턴으로 통일했습니다.",
+          "[Logger] ILogger 인터페이스로 환경별 구현을 분기했습니다(test→Noop, production→Sentry, development→Console). Sentry에는 API URL · 네트워크 타입 · 유저 정보를 직접 추가하고, beforeSend로 민감 엔드포인트 수집을 차단했습니다.",
+          "[Result] 에러 처리가 createMutationOptions 한 곳으로 모이고, 42개 mutation 에러가 Sentry에 자동 수집됩니다. 테스트는 NoopLogger로 SDK 로드 비용이 없고, 모니터링 서비스 교체 시 단일 파일만 수정하면 됩니다.",
         ],
-        image: moingDesign,
-        imageCaption: "Storybook 디자인 시스템",
+        code: CODE_ERROR_HANDLING + "\n\n" + CODE_LOGGER_INTERFACE + "\n\n" + CODE_LOGGER_FACTORY,
+        image: moingSentry,
+        imageCaption: "Sentry 에러 수집 화면 — API URL · 환경 · 브라우저 컨텍스트 자동 기록",
       },
       {
-        icon: "🗺",
-        title: "2. 국내/해외 동적 지도 렌더링 및 다중 좌표 시각화",
+        icon: "♿",
+        title: "2. 번들 분석 기반 성능 최적화 — 초기 번들 -91%",
         paragraphs: [
-          "[Problem] 여행 서비스 특성상 국내외 지역을 모두 커버해야 하며, 사용자가 등록한 여러 일정을 한눈에 파악하기 어려움.",
-          "[Solution & Result] 카카오 지도 API(국내)와 구글 지도 API(해외)를 주소 기반으로 동적 분기 처리. 각 일정의 좌표를 바탕으로 지도에 순서대로 선을 연결하는 UI를 구현하여 여행 동선을 직관적으로 시각화했습니다.",
+          "[Problem] 감이 아닌 수치로 병목을 파악하기 위해 @next/bundle-analyzer로 webpack 트리맵을 시각화했습니다. TravelLogMap(Leaflet + 세계지도 GeoJSON)이 1.6MB 단일 청크를 점유하고 있었고, AppShell이 dynamic({ ssr: false })로 감싸져 SSR이 비활성화된 상태였습니다.",
+          "[Solution] 초기 뷰포트에서 보이지 않는 3개 컴포넌트(TravelLogMap · MapContainer · EmblaCarousel)에 next/dynamic({ ssr: false })를 적용해 청크를 분리했습니다. AppShell SSR 활성화, next/image priority로 LCP 후보 이미지 preload, Pretendard 서브셋 전환(748kB → 264kB), loading.tsx 4개 라우트 작성으로 Streaming SSR을 구현했습니다.",
+          "[Result] /userProfile/log 번들 1.79MB → 164kB(-91%), /trip/detail 450kB → 262kB(-42%)를 달성했습니다. ssr: false는 Leaflet의 window 참조 SSR 에러도 동시에 해결했습니다.",
         ],
-        images: [moingMap1, moingMap2],
-        imageCaption: "국내/해외 지도 렌더링",
+        code: CODE_DYNAMIC_IMPORT,
       },
       {
-        icon: "🗓",
-        title: "3. 확장성을 고려한 커스텀 캘린더 자체 개발",
+        icon: "♿",
+        title: "3. Production 빌드 기반 웹 접근성 개선 — Lighthouse Accessibility 96점",
         paragraphs: [
-          "[Problem] 기존 캘린더 라이브러리는 디자인 커스터마이징이 제한적이며, 여행 서비스 특성에 맞는 유연한 확장이 어려움.",
-          "[Solution & Result] 라이브러리에 의존하지 않고 시작일/종료일 선택 및 확장이 유연한 커스텀 캘린더를 직접 개발. 서비스 톤앤매너를 유지하면서 확장성을 확보했습니다.",
+          "[Problem] axe-core 단위 테스트로는 발견되지 않는 구조적 접근성 문제가 존재했습니다. 앱 전체에 <main> 랜드마크 누락, WCAG 4.5:1 색 대비 미달 3곳, <div onClick> 패턴으로 키보드 접근 불가 요소 4건, 모달 Tab 이탈 문제 등 13개 위반이 확인됐습니다.",
+          "[Solution] <div onClick> → <button> 전환, <main> 랜드마크 추가, CSS 변수 기반 색상 수정, focus-visible 포커스 스타일 적용. WAI-ARIA Listbox 패턴(↑↓ 탐색 · Enter 선택 · Escape 닫기)과 Focus Trap을 직접 구현해 키보드 · 스크린리더 사용자도 동일한 UX를 경험할 수 있도록 했습니다.",
+          "[Result] Production 빌드 기준 Lighthouse Accessibility 96점 · Performance 98점을 달성했습니다.",
         ],
-        image: moingCalendar,
-        imageCaption: "커스텀 캘린더",
-      },
-      {
-        icon: "🔐",
-        title: "4. 매끄러운 인증 플로우 및 동적 폼 유효성 검사",
-        paragraphs: [
-          "[Problem] 회원가입 및 로그인 과정에서의 불편함이 유저 이탈로 이어질 수 있음.",
-          "[Solution & Result] 소셜 로그인(네이버·카카오·구글) 통합 및 Zod 스키마를 활용한 실시간 동적 폼 유효성 검사 적용. 특히 6자리 인증 코드 입력 시 useRef를 활용해 숫자 패드 지원, 붙여넣기 시 자동 분할, 백스페이스 포커스 이동 등 엣지 케이스를 완벽히 제어하여 사용자 피로도를 최소화했습니다.",
-        ],
-        images: [moingAuth1, moingAuth2],
-        imageCaption: "인증 플로우 및 폼 유효성 검사",
-      },
-      {
-        icon: "🔍",
-        title: "5. 무한 스크롤 및 다중 필터 검색 최적화",
-        paragraphs: [
-          "[Problem] 다량의 동행 모집 글과 복잡한 검색 조건(장소·인원·기간·스타일 등)을 효율적으로 처리해야 함.",
-          "[Solution & Result] useInfiniteScroll과 Intersection Observer를 조합해 페이지네이션을 최적화. 아코디언 방식의 다중 필터링 시스템을 구축하고, 선택된 필터 수에 따라 태그 라벨이 자동 변환되는 UI를 제공하여 탐색 경험을 개선했습니다.",
-        ],
-        images: [moingFilter1, moingFilter2],
-        imageCaption: "다중 필터 검색",
+        code: CODE_FOCUS_TRAP,
+        image: moingLighthouse,
+        imageCaption: "Lighthouse 측정 결과 — Production 빌드 기준",
       },
     ],
   },
