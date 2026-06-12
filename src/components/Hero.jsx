@@ -1,15 +1,19 @@
 const BULLETS = [
   {
-    title: "코드 품질과 프로덕트 안정성",
-    desc: "FSD 아키텍처 전환·TDD 테스트 구축(0→237개), 번들 분석 기반 성능 최적화(초기 번들 -91%, Lighthouse Performance 98점), 에러 핸들링 공통화 및 Sentry 모니터링 도입, 웹 접근성 개선(Lighthouse Accessibility 96점) 등 코드 품질과 서비스 안정성 향상을 주도해왔습니다.",
+    title: "오픈소스 깊이 — facebook/lexical 14번째 기여자",
+    desc: "Meta 의 리치 텍스트 에디터 facebook/lexical 에 한국어 입력기 자동완성을 진입점으로 합류해 reconciler 성능 (5,000 paragraph 타이핑 8.46 배), 접근성 (WCAG 2.1 AA), 새 자료구조 (Named Slots) 까지 영역을 넓혔습니다. 메인테이너 (etrepum) 와 여러 차례 설계 논의를 거쳐 구조적 변경 PR 을 진행해 왔습니다.",
   },
   {
-    title: "데이터로 증명하는 UX 개선",
-    desc: "직감이 아닌 데이터로 소통합니다. 팀 내 UX 개선 필요성을 설득하기 위해 자발적으로 Amplitude를 도입하고, 데이터 기반으로 가입 플로우를 재설계해 회원가입 전환율을 6%→14%(2.3배)로 높였습니다.",
+    title: "오픈소스 폭 — 다양한 라이브러리에 기여",
+    desc: "텍스트 측정 라이브러리 chenglou/pretext (★48k) 에 한국어 / CJK 처리 관련 기여, vitest / recharts 등에도 본인이 마주친 버그를 직접 수정해 머지했습니다.",
   },
   {
-    title: "팀 DX 개선 및 오픈소스 기여",
-    desc: "동료들의 개발 경험을 중요하게 생각합니다. React Native 애니메이션 라이브러리(reanimated-composer)를 직접 개발해 npm 오픈소스로 배포, 반복 보일러플레이트 30줄을 3줄로 단축했습니다.",
+    title: "자체 라이브러리 — npm 배포 2 종",
+    desc: "팀 DX 향상용 애니메이션 라이브러리 Reanimated Composer 와 React 폼 자동 저장 라이브러리 formdraft (5.8KB brotli, 216 unit + 87 Playwright e2e) 두 종을 직접 개발해 npm 으로 배포했습니다.",
+  },
+  {
+    title: "코드 품질 + 데이터 UX",
+    desc: "스타트업 Sometime 에서 데이터 기반 UX 개선으로 회원가입 전환율 6% → 14% (2.3 배) 를 이끌었습니다. FSD 아키텍처 전환, TDD 0 → 237, 번들 -91%, Lighthouse Performance 98 / Accessibility 96 등 코드 품질 / 안정성 개선도 함께 진행했습니다.",
   },
 ];
 
@@ -23,7 +27,7 @@ export default function Hero() {
         color: "#9CA3AF", fontFamily: "monospace",
         margin: "0 0 24px",
         animation: "fadeUp 0.7s ease both",
-      }}>FRONTEND DEVELOPER</p>
+      }}>FRONTEND DEVELOPER · OPEN SOURCE CONTRIBUTOR</p>
 
       {/* Name */}
       <h1 style={{
@@ -41,12 +45,20 @@ export default function Hero() {
         color: "#374151",
         margin: "0 0 12px",
         animation: "fadeUp 0.8s ease 0.2s both",
-        maxWidth: 560,
+        maxWidth: 620,
         wordBreak: "keep-all",
       }}>
-        코드 품질과 서비스 성장을{" "}
+        Meta 의 오픈소스 텍스트 에디터{" "}
+        <span style={{
+          fontFamily: "monospace",
+          background: "#F3F4F6",
+          padding: "1px 6px",
+          borderRadius: 4,
+          fontSize: "0.9em",
+        }}>facebook/lexical</span>
+        {" "}의{" "}
         <span style={{ color: "#7C3AED", fontWeight: 700 }}>
-          함께 고민하는 프론트엔드 개발자
+          14번째 기여자
         </span>입니다.
       </p>
 
@@ -55,11 +67,11 @@ export default function Hero() {
         fontSize: 15, color: "#6B7280", lineHeight: 1.9,
         margin: "0 0 48px",
         animation: "fadeUp 0.8s ease 0.25s both",
-        maxWidth: 520,
+        maxWidth: 580,
         wordBreak: "keep-all",
       }}>
-        스타트업에서 아키텍처 개선·성능 최적화·접근성 대응 등 기술적 깊이를 쌓으며,
-        서비스 지표와 팀 생산성 향상에도 직접 기여해왔습니다.
+        한국어 입력기 자동완성을 진입점으로 lexical 에 합류해 성능 / 접근성 / 자료구조까지 영역을 넓혔고,
+        pretext / formdraft / vitest 등 다양한 오픈소스에 기여하고 있습니다.
       </p>
 
       {/* Divider */}

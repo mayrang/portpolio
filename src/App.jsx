@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
+import OpenSourceSection from "./components/opensource/OpenSourceSection";
 import ProjectsSection from "./components/projects/ProjectsSection";
 import Skills from "./components/Skills";
 import Footer from "./components/Footer";
@@ -27,6 +28,7 @@ export default function App() {
 
       <Nav solid={navSolid} />
       <Hero />
+      <OpenSourceSection />
       <ProjectsSection />
       <Skills />
       <Footer />
